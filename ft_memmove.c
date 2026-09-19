@@ -6,7 +6,7 @@
 /*   By: ialnuman <ibrahim.alnuman@learner.42.te    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 17:24:03 by ialnuman          #+#    #+#             */
-/*   Updated: 2026/09/13 17:24:03 by ialnuman         ###   ########.fr       */
+/*   Updated: 2026/09/19 14:33:13 by ialnuman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char		*dest;
-	const unsigned char	*source;
+	unsigned char		*d;
+	const unsigned char	*s;
+	size_t				i;
 
 	if (dst == NULL && src == NULL)
 		return (NULL);
-	dest = (unsigned char *)dst;
-	source = (const unsigned char *)src;
-	if (dest < source)
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
+	if (d < s)
 	{
-		while (len--)
-			*dest++ = *source++;
+		return (ft_memcpy(dst, src, len));
 	}
 	else
 	{
-		dest += len;
-		source += len;
-		while (len--)
-			*(--dest) = *(--source);
+		i = len;
+		while (i > 0)
+		{
+			i--;
+			d[i] = s[i];
+		}
 	}
 	return (dst);
 }

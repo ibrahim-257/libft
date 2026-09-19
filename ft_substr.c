@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ialnuman <ibrahim.alnuman@learner.42.te    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/18 17:03:15 by ialnuman          #+#    #+#             */
-/*   Updated: 2026/09/18 17:03:15 by ialnuman         ###   ########.fr       */
+/*   Created: 2026/09/19 13:04:24 by ialnuman          #+#    #+#             */
+/*   Updated: 2026/09/19 13:04:24 by ialnuman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdint.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	void	*ptr;
-	size_t	total_size;
+	size_t	s_len;
+	char	*ptr;
 
-	if (nmemb != 0 && (size_t)-1 / nmemb < size)
+	if (s == NULL)
 		return (NULL);
-	total_size = nmemb * size;
-	ptr = malloc(total_size);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+	{
+		return (ft_strdup(""));
+	}
+	if (len > s_len - start)
+		len = s_len - start;
+	ptr = (char *)malloc((len + 1) * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
-	ft_bzero(ptr, total_size);
+	ft_strlcpy(ptr, s + start, len + 1);
 	return (ptr);
 }
